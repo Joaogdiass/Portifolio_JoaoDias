@@ -1,26 +1,18 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "incremental": true,  // Habilita a compilação incremental
+    "tsBuildInfoFile": "./buildcache/tsbuildinfo", // Diretório para armazenar arquivos de cache de build
+ 
+    "strict": true,  // Habilitar todas as opções de checagem de tipo
+    "esModuleInterop": true,  // Habilitar interoperabilidade com módulos CommonJS
+    "skipLibCheck": true,  // Ignorar a checagem de tipos de bibliotecas
+    "forceConsistentCasingInFileNames": true,  // Garantir nomes de arquivos consistentes
+    "moduleResolution": "node",  // Modo de resolução de módulos
+    "resolveJsonModule": true,  // Permitir importação de arquivos JSON
+    "isolatedModules": true,  // Garantir que cada arquivo seja tratado como módulo isolado
+    "jsx": "react-jsx"  // Usar JSX moderno
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*"  // Incluir todos os arquivos na pasta src
+  ]
 }
