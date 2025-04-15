@@ -1,0 +1,21 @@
+{
+    "hero": {
+      "title": "Engenheiro de Software",
+      "intro": "Olá, meu nome é João Gabriel Dias. Desenvolvo experiências digitais elegantes e funcionais."
+    },
+    "about": {
+      "heading": "Sobre mim",
+      "text": "Sou um desenvolvedor apaixonado por transformar ideias em soluções digitais..."
+    },
+    "projects": {
+      "heading": "Projetos"
+    },
+    "skills": {
+      "heading": "Habilidades"
+    },
+    "contact": {
+      "heading": "Contato",
+      "button": "Enviar mensagem"
+    }
+  }
+  
