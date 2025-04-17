@@ -11,37 +11,31 @@ const projectData = [
     image: '/images/projetos/teste.png',
     site: 'https://projeto1.com',
     github: 'https://github.com/seuusuario/projeto1',
-    images: [
-      '/images/projetos/teste.png',
-      '/images/projetos/teste.png',
-      '/images/projetos/teste.png'
-    ]
+    images: ['/images/projetos/teste.png']
   },
   {
     id: 2,
     title: 'Projeto 2',
     description: 'Descrição curta do projeto 2.',
-    details: 'Detalhes do projeto 2 com mais informações técnicas e objetivos.',
+    details: 'Projeto ainda em desenvolvimento. Em breve mais detalhes estarão disponíveis.',
     image: '/images/projetos/projeto2.png',
-    site: 'https://projeto2.com',
-    github: 'https://github.com/seuusuario/projeto2',
-    images: [
-      '/images/projetos/projeto2.png',
-      '/images/projetos/projeto2-extra1.png'
-    ]
+    site: '',
+    github: '',
+    images: ['/images/projetos/projeto2.png'],
+    comingSoon: true
   },
   {
     id: 3,
     title: 'Projeto 3',
     description: 'Descrição curta do projeto 3.',
-    details: 'Expansão sobre funcionalidades do projeto 3 e como foi desenvolvido.',
+    details: 'Projeto em fase de estruturação inicial. Em breve será lançado.',
     image: '/images/projetos/projeto3.png',
-    site: 'https://projeto3.com',
-    github: 'https://github.com/seuusuario/projeto3',
-    images: ['/images/projetos/projeto3.png']
+    site: '',
+    github: '',
+    images: ['/images/projetos/projeto3.png'],
+    comingSoon: true
   },
 ];
-
 
 export const Projects = () => {
   const [activeProject, setActiveProject] = useState<typeof projectData[0] | null>(null);
@@ -58,28 +52,46 @@ export const Projects = () => {
   };
 
   return (
-    <section id="projects" className="min-h-screen p-6 md:p-10 relative">
-      <h2 className="text-2xl md:text-3xl mb-6 text-center">Projetos</h2>
+    <motion.section id="projects" className="min-h-screen p-6 md:p-10 text-white flex flex-col justify-center relative overflow-hidden" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+      <h2 className="text-3xl mb-10 text-center font-bold text-white">Projetos</h2>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projectData.map((project) => (
-          <motion.div
-            key={project.id}
-            className="bg-[#1f2937] rounded-xl overflow-hidden shadow-lg cursor-pointer hover:scale-[1.02] transition-transform"
-            whileHover={{ scale: 1.02 }}
-            layout
-            onClick={() => {
-              setActiveProject(project);
-              setImageIndex(0);
-            }}
-          >
-            <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-sm text-gray-300">{project.description}</p>
-            </div>
-          </motion.div>
-        ))}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projectData.map((project) => {
+          const isComingSoon = project.comingSoon;
+
+          return (
+            <motion.div
+              key={project.id}
+              className={`group bg-black border border-white rounded-xl overflow-hidden shadow-xl relative transition-all duration-300 hover:bg-white hover:text-black ${isComingSoon ? 'pointer-events-none opacity-60' : 'hover:scale-[1.02] cursor-pointer'}`}
+              layout
+              onClick={() => {
+                if (!isComingSoon) {
+                  setActiveProject(project);
+                  setImageIndex(0);
+                }
+              }}
+            >
+              <div className="relative">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={`w-full h-48 object-cover transition-all duration-300 ${isComingSoon ? 'brightness-50' : ''}`}
+                />
+                {isComingSoon && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="bg-yellow-400 text-black text-sm px-3 py-1 rounded-full font-bold shadow-lg group-hover:animate-pulse">
+                      EM BREVE
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="p-5 border-t border-white group-hover:text-black min-h-[160px]">
+                <h3 className="text-xl font-semibold mb-1 group-hover:text-black">{project.title}</h3>
+                <p className="text-sm text-gray-300 group-hover:text-black">{project.description}</p>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       <AnimatePresence>
@@ -124,35 +136,37 @@ export const Projects = () => {
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-2">{activeProject.title}</h3>
                 <p className="text-sm text-gray-300 mb-4">{activeProject.details}</p>
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href={activeProject.site}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
-                  >
-                    Site
-                  </a>
-                  <a
-                    href={activeProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
-                  >
-                    GitHub
-                  </a>
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
-                    onClick={() => setActiveProject(null)}
-                  >
-                    Fechar
-                  </button>
-                </div>
+                {!activeProject.comingSoon && (
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href={activeProject.site}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
+                    >
+                      Site
+                    </a>
+                    <a
+                      href={activeProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+                )}
+                <button
+                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
+                  onClick={() => setActiveProject(null)}
+                >
+                  Fechar
+                </button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 };
