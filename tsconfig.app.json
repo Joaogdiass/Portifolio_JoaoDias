@@ -1,18 +1,11 @@
 {
   "compilerOptions": {
-    "incremental": true,  // Habilita a compilação incremental
-    "tsBuildInfoFile": "./buildcache/tsbuildinfo", // Diretório para armazenar arquivos de cache de build
- 
-    "strict": true,  // Habilitar todas as opções de checagem de tipo
-    "esModuleInterop": true,  // Habilitar interoperabilidade com módulos CommonJS
-    "skipLibCheck": true,  // Ignorar a checagem de tipos de bibliotecas
-    "forceConsistentCasingInFileNames": true,  // Garantir nomes de arquivos consistentes
-    "moduleResolution": "node",  // Modo de resolução de módulos
-    "resolveJsonModule": true,  // Permitir importação de arquivos JSON
-    "isolatedModules": true,  // Garantir que cada arquivo seja tratado como módulo isolado
-    "jsx": "react-jsx"  // Usar JSX moderno
-  },
-  "include": [
-    "src/**/*"  // Incluir todos os arquivos na pasta src
-  ]
+    "target": "ES2017",           // ou "ES6", "ES2020", "ESNext"
+    "lib": ["DOM", "ES2017"],     // necessário para Promise e APIs modernas
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "react-jsx"
+  }
 }
