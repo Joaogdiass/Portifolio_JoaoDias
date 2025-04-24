@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@import "tailwindcss/utilities";
+
+
+
+
+
 /* Adicionando classes personalizadas do Tailwind */
 html {
   scroll-behavior: smooth;

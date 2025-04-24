@@ -21,7 +21,7 @@ export const About = () => {
         </motion.h2>
 
         <motion.p
-          className="text-base md:text-lg text-gray-300"
+          className="text-base md:text-lg text-gray-300  "
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}

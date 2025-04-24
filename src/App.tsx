@@ -5,17 +5,24 @@ import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import FixedControls from "./components/FixedControls";
+
+
+
 
 function App() {
   return (
     <div className="bg-black text-white">
+      
       <Header />
       <Hero />
+      <FixedControls />
       <About />
       <Projects />
       <Skills />
       <Contact />
       <Footer />
+     
     </div>
   );
 }
