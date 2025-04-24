@@ -1,19 +1,32 @@
+// src/components/Hero.tsx
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
+import { DonutChartHero } from './DonutChartHero';
 
 export const Hero = () => {
-  const { t } = useTranslation();
-
   return (
-    <section className="h-screen flex items-center justify-center bg-white text-black dark:bg-black dark:text-white p-6 text-center transition-colors duration-500">
-      <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl font-bold"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-12 bg-gradient-to-b from-[#0f172a] via-black to-[#0f172a] text-white relative overflow-hidden">
+      {/* Texto principal */}
+      <motion.div
+        className="md:w-1/2 z-10 text-center md:text-left"
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
       >
-        {t("hero.title")}
-      </motion.h1>
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+          Oi, meu nome é <span className="text-cyan-400">Joao Dias</span>
+        </h1>
+        <p className="mt-4 text-xl md:text-2xl text-slate-300 font-medium">
+          Transformo complexidade em clareza com <span className="text-cyan-400 font-bold">dados</span>
+        </p>
+        <p className="mt-4 text-base md:text-lg text-slate-400 max-w-md">
+        <span className="text-cyan-400 font-bold">Engenheiro de Software</span> com foco em dados, apaixonado por gerar impacto com informações bem visualizadas.
+        </p>
+      </motion.div>
+
+      {/* Gráfico Donut em vez da bolha */}
+      <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center relative">
+        <DonutChartHero />
+      </div>
     </section>
   );
 };

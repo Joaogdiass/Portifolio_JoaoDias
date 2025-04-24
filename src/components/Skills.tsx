@@ -48,22 +48,20 @@ export const Skills = () => {
   return (
     <motion.section
       id="skills"
-      className="min-h-screen p-6 md:p-10 text-white flex flex-col justify-center relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-b from-[#0f172a] via-black to-[#0f172a] p-6 md:p-10 text-white flex flex-col justify-center relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      
+      <h2 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-6 text-center z-10">Skills</h2>
 
-      <h2 className="text-3xl mb-6 text-center relative z-10">Skills</h2>
-
-      <div className="flex justify-center mb-8 flex-wrap gap-4 relative z-10">
+      <div className="flex justify-center mb-8 flex-wrap gap-4 z-10">
         {Object.keys(skillsData).map((category) => (
           <button
             key={category}
             onClick={() => setActiveTab(category)}
             className={`px-6 py-2 rounded border transition-all duration-300 ${
-              activeTab === category ? 'bg-gray-200 text-black' : 'border-white'
+              activeTab === category ? 'bg-cyan-400 text-black font-semibold' : 'border-cyan-400 text-white'
             }`}
           >
             {category}
@@ -74,7 +72,7 @@ export const Skills = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
-          className="flex justify-center flex-wrap gap-8 relative z-10"
+          className="flex justify-center flex-wrap gap-8 z-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

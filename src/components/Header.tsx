@@ -1,33 +1,75 @@
 import { useState } from 'react';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { motion } from 'framer-motion';
+import { AiOutlineMenu, AiOutlineClose, AiOutlineDownload } from 'react-icons/ai';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const navLinks = [
+    { label: 'Sobre', href: '#about' },
+    { label: 'Projetos', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Contato', href: '#contact' },
+  ];
+
   return (
-    <header className="fixed top-0 left-0 w-full bg-black p-4 z-50 shadow-lg">
-      <nav className="max-w-6xl mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold">Joao Dias</div>
-        <div className="hidden md:flex space-x-6">
-          <a href="#about" className="hover:text-gray-400">Sobre</a>
-          <a href="#projects" className="hover:text-gray-400">Projetos</a>
-          <a href="#skills" className="hover:text-gray-400">Skills</a>
-          <a href="#contact" className="hover:text-gray-400">Contato</a>
+    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/60 border-b border-white/10 shadow-md">
+      <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center text-white">
+        {/* Logo com efeito */}
+        <motion.div
+          className="text-2xl font-bold tracking-wide text-cyan-400"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Joao Dias
+        </motion.div>
+
+        {/* Links desktop */}
+        <div className="hidden md:flex items-center space-x-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="relative group text-sm uppercase tracking-wide"
+            >
+              {link.label}
+              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+            </a>
+          ))}
+
+          
         </div>
+
+        {/* Mobile menu */}
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-2xl">
             {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
           </button>
         </div>
       </nav>
+
+      {/* Dropdown mobile */}
       {isOpen && (
-        <div className="md:hidden bg-black text-white flex flex-col items-center mt-4 space-y-4">
-          <a href="#about" onClick={toggleMenu} className="hover:text-gray-400">Sobre</a>
-          <a href="#projects" onClick={toggleMenu} className="hover:text-gray-400">Projetos</a>
-          <a href="#skills" onClick={toggleMenu} className="hover:text-gray-400">Skills</a>
-          <a href="#contact" onClick={toggleMenu} className="hover:text-gray-400">Contato</a>
-        </div>
+        <motion.div
+          className="md:hidden bg-black/90 text-white flex flex-col items-center py-4 space-y-4"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={toggleMenu}
+              className="text-base hover:text-cyan-400 transition"
+            >
+              {link.label}
+            </a>
+          ))}
+        
+        </motion.div>
       )}
     </header>
   );
