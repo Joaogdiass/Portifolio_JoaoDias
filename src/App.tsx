@@ -12,9 +12,7 @@ import FixedControls from "./components/FixedControls";
 
 function App() {
   return (
-    <div className="bg-black text-white">
-      
-    
+    <div>
       <Header />
       <Hero />
       <FixedControls />
@@ -23,7 +21,6 @@ function App() {
       <Skills />
       <Contact />
       <Footer />
-     
     </div>
   );
 }

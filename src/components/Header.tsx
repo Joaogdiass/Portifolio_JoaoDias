@@ -7,6 +7,7 @@ export const Header = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
+    { label: 'Home', href: '#hero' },
     { label: 'Sobre', href: '#about' },
     { label: 'Projetos', href: '#projects' },
     { label: 'Skills', href: '#skills' },
@@ -14,16 +15,16 @@ export const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/60 border-b border-white/10 shadow-md">
-      <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center text-white">
+    <header className="fixed top-0 left-0 w-full z-50  ">
+      <nav className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center ">
         {/* Logo com efeito */}
         <motion.div
-          className="text-2xl font-bold tracking-wide text-cyan-400"
+          className="text-2xl font-bold tracking-wide "
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Joao Dias
+          João Dias
         </motion.div>
 
         {/* Links desktop */}
@@ -35,7 +36,7 @@ export const Header = () => {
               className="relative group text-sm uppercase tracking-wide"
             >
               {link.label}
-              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+              <span id="header-hover" className="absolute left-0 -bottom-1 h-0.5 w-0  group-hover:w-full transition-all duration-300"></span>
             </a>
           ))}
 
@@ -53,7 +54,7 @@ export const Header = () => {
       {/* Dropdown mobile */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-black/90 text-white flex flex-col items-center py-4 space-y-4"
+          className="md:hidden flex flex-col items-center py-4 space-y-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}

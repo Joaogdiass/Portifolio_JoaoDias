@@ -35,6 +35,17 @@ const projectData = [
     images: ['/images/projetos/projeto3.png'],
     comingSoon: true
   },
+  {
+    id: 4,
+    title: 'Projeto 3',
+    description: 'Descrição curta do projeto 3.',
+    details: 'Projeto em fase de estruturação inicial. Em breve será lançado.',
+    image: '/images/projetos/projeto3.png',
+    site: '',
+    github: '',
+    images: ['/images/projetos/projeto3.png'],
+    comingSoon: true
+  },
 ];
 
 export const Projects = () => {
@@ -53,7 +64,7 @@ export const Projects = () => {
 
   return (
     <motion.section id="projects" className="min-h-screen p-6 md:p-10 text-white flex flex-col justify-center relative overflow-hidden" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
-      <h2 className="text-3xl mb-10 text-center font-bold text-white">Projetos</h2>
+      <h2 className="text-3xl mb-10 text-center font-bold ">Projetos</h2>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectData.map((project) => {
@@ -62,7 +73,7 @@ export const Projects = () => {
           return (
             <motion.div
               key={project.id}
-              className={`group bg-black border border-white rounded-xl overflow-hidden shadow-xl relative transition-all duration-300 hover:bg-white hover:text-black ${isComingSoon ? 'pointer-events-none opacity-60' : 'hover:scale-[1.02] cursor-pointer'}`}
+              className={`group  border border-white rounded-xl overflow-hidden shadow-xl relative transition-all duration-300  ${isComingSoon ? 'pointer-events-none opacity-60' : 'hover:scale-[1.02] cursor-pointer'}`}
               layout
               onClick={() => {
                 if (!isComingSoon) {

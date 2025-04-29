@@ -1,6 +1,8 @@
 {
     "hero": {
-      "title": "Olá, eu sou o João 👋"
+      "title": "Olá, eu sou o João",
+      "subtitle": "Engenheiro de Software"
+      
     }
   }
   

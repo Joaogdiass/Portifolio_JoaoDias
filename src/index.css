@@ -9,6 +9,7 @@
 /* Adicionando classes personalizadas do Tailwind */
 html {
   scroll-behavior: smooth;
+  
 }
 
 body {
@@ -16,4 +17,52 @@ body {
   color: #fff;
   font-family: 'Inter', sans-serif;
 } 
+
+.dark body,.dark {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+#header-hover{
+  background-color: white
+}
+
+.dark #header-hover{
+  background-color: #333
+}
+
+
+/* Efeito de digitação */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Efeito de piscar do cursor */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.typing-effect {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 4px solid #fff;
+  animation: typing 3s steps(40) 1s forwards, blink 0.75s step-end infinite;
+  animation-delay: 1s, 3s;  /* Delay para que o cursor pisque durante o processo de digitação */
+  animation-fill-mode: forwards;  /* Faz a animação manter o estado final */
+}
+
+/* Após o efeito de digitação, a borda desaparece */
+.typing-effect.finished {
+  border-right: none; /* Remove a borda do cursor */
+}
+
 

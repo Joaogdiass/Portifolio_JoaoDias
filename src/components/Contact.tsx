@@ -55,7 +55,7 @@ export const Contact = () => {
             type="text"
             name="name"
             placeholder="Seu nome"
-            className="p-2 rounded text-white"
+            className="p-2 rounded border-1 border-gray-200 text-white"
             value={formData.name}
             onChange={handleChange}
             whileFocus={{ scale: 1.02 }}
@@ -65,21 +65,22 @@ export const Contact = () => {
             type="email"
             name="email"
             placeholder="Seu email"
-            className="p-2 rounded text-white"
+            className="p-2 rounded border-1 border-gray-200 text-white"
             value={formData.email}
             onChange={handleChange}
             whileFocus={{ scale: 1.02 }}
             required
           />
-          <motion.textarea
+         <motion.textarea
             name="message"
             placeholder="Sua mensagem"
-            className="p-2 rounded h-32 text-white"
+            className="p-2 rounded h-32 text-white border-1 border-gray-200  resize-none"
             value={formData.message}
             onChange={handleChange}
-            whileFocus={{ scale: 1.02 }}
+            whileFocus={{ scale: 1.02 }}  // Mantém a animação de foco
             required
           />
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}

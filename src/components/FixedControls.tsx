@@ -11,16 +11,16 @@ export default function FixedControls() {
     <div className="fixed bottom-4 right-4 flex flex-col items-end gap-3 z-50">
       <button
         onClick={toggleTheme}
-        className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white shadow-lg hover:scale-110 transition-transform"
+        className="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white shadow-lg hover:scale-110 transition-transform"
       >
-        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+        {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
       <button
         onClick={toggleLang}
-        className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white shadow-lg hover:scale-110 transition-transform"
+        className="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white text-black dark:bg-black dark:text-white shadow-lg hover:scale-110 transition-transform"
       >
-        <Globe size={18} />
+        <Globe size={20} />
       </button>
     </div>
   );
