@@ -23,6 +23,7 @@ export const Hero = () => {
   return (
     <section id="hero" className="h-screen relative overflow-hidden">
       <div className="absolute inset-0 z-10 opacity-50" />
+      
       <motion.div
         className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6"
         initial={{ opacity: 0, y: 50 }}
@@ -64,6 +65,7 @@ export const Hero = () => {
             className="hover:text-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
           >
             <FaGithub size={50} />
+            
           </a>
         </div>
       </motion.div>

@@ -4,7 +4,34 @@ import { ThemeContext } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-const projectIds = ['1', '2', '3', '4']; // IDs como string para uso no i18n
+type Project = {
+  id: string;
+  logoLight: string;
+  logoDark: string;
+};
+
+const projectData: Project[] = [
+  {
+    id: '1',
+    logoLight: '/images/projetos/xp-white.webp',
+    logoDark: '/images/projetos/xp.png',
+  },
+  {
+    id: '2',
+    logoLight: '/images/projetos/hc.png',
+    logoDark: '/images/projetos/hc.png',
+  },
+  {
+    id: '3',
+    logoLight: '/images/projetos/ibm.png',
+    logoDark: '/images/projetos/ibm.png',
+  },
+  {
+    id: '4',
+    logoLight: '/images/projetos/hapvida.png',
+    logoDark: '/images/projetos/hapvida.png',
+  }
+];
 
 export const Projects = () => {
   const [value, setValue] = useState(0);
@@ -12,7 +39,8 @@ export const Projects = () => {
   const { t } = useTranslation();
   const isDark = theme === 'dark';
 
-  const id = projectIds[value];
+  const current = projectData[value];
+  const id = current.id;
 
   const title = t(`projects.${id}.title`);
   const description = t(`projects.${id}.description`);
@@ -20,9 +48,8 @@ export const Projects = () => {
   const extra = t(`projects.${id}.extra`);
   const universityNote = t(`projects.${id}.universityNote`);
   const techStack = t(`projects.${id}.techStack`, { returnObjects: true }) as string[];
-  const logoLight = t(`projects.${id}.companyLogoLight`);
-  const logoDark = t(`projects.${id}.companyLogoDark`);
-  const logoSrc = isDark ? logoDark : logoLight;
+
+  const logoSrc = isDark ? current.logoDark : current.logoLight;
 
   return (
     <motion.section
@@ -55,10 +82,10 @@ export const Projects = () => {
             aria-label="project tabs"
             indicatorColor="primary"
           >
-            {projectIds.map((pid) => (
+            {projectData.map((proj) => (
               <Tab
-                key={pid}
-                label={t(`projects.${pid}.title`).toUpperCase()}
+                key={proj.id}
+                label={t(`projects.${proj.id}.title`).toUpperCase()}
                 sx={{
                   fontWeight: 600,
                   color: isDark ? 'black' : 'inherit',
