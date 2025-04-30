@@ -29,7 +29,7 @@ export default function FixedControls() {
       {/* Botão de CV à esquerda */}
       <div className="fixed bottom-4 left-4 z-50">
         <a
-          href="/cv/Curriculo-JoaoGabriel.pdf"
+          href="/cv/resume_cv.pdf"
           download
           className="flex items-center gap-2 px-5 py-2 rounded-full bg-white text-black dark:bg-black dark:text-white shadow-lg text-base font-semibold hover:scale-105 transition-transform"
         >
