@@ -1,183 +1,123 @@
-// src/components/Projects.tsx
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Box, Tabs, Tab, Typography, Stack } from '@mui/material';
+import { ThemeContext } from '../contexts/ThemeContext';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-const projectData = [
-  {
-    id: 1,
-    title: 'Projeto 1',
-    description: 'Descrição curta do projeto 1.',
-    details: 'Aqui vai uma explicação mais longa sobre o projeto, incluindo tecnologias usadas, desafios enfrentados, etc.',
-    image: '/images/projetos/teste.png',
-    site: 'https://projeto1.com',
-    github: 'https://github.com/seuusuario/projeto1',
-    images: ['/images/projetos/teste.png']
-  },
-  {
-    id: 2,
-    title: 'Projeto 2',
-    description: 'Descrição curta do projeto 2.',
-    details: 'Projeto ainda em desenvolvimento. Em breve mais detalhes estarão disponíveis.',
-    image: '/images/projetos/projeto2.png',
-    site: '',
-    github: '',
-    images: ['/images/projetos/projeto2.png'],
-    comingSoon: true
-  },
-  {
-    id: 3,
-    title: 'Projeto 3',
-    description: 'Descrição curta do projeto 3.',
-    details: 'Projeto em fase de estruturação inicial. Em breve será lançado.',
-    image: '/images/projetos/projeto3.png',
-    site: '',
-    github: '',
-    images: ['/images/projetos/projeto3.png'],
-    comingSoon: true
-  },
-  {
-    id: 4,
-    title: 'Projeto 3',
-    description: 'Descrição curta do projeto 3.',
-    details: 'Projeto em fase de estruturação inicial. Em breve será lançado.',
-    image: '/images/projetos/projeto3.png',
-    site: '',
-    github: '',
-    images: ['/images/projetos/projeto3.png'],
-    comingSoon: true
-  },
-];
+const projectIds = ['1', '2', '3', '4']; // IDs como string para uso no i18n
 
 export const Projects = () => {
-  const [activeProject, setActiveProject] = useState<typeof projectData[0] | null>(null);
-  const [imageIndex, setImageIndex] = useState(0);
+  const [value, setValue] = useState(0);
+  const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
+  const isDark = theme === 'dark';
 
-  const nextImage = () => {
-    if (!activeProject) return;
-    setImageIndex((prev) => (prev + 1) % activeProject.images.length);
-  };
+  const id = projectIds[value];
 
-  const prevImage = () => {
-    if (!activeProject) return;
-    setImageIndex((prev) => (prev - 1 + activeProject.images.length) % activeProject.images.length);
-  };
+  const title = t(`projects.${id}.title`);
+  const description = t(`projects.${id}.description`);
+  const subdescription = t(`projects.${id}.subdescription`);
+  const extra = t(`projects.${id}.extra`);
+  const universityNote = t(`projects.${id}.universityNote`);
+  const techStack = t(`projects.${id}.techStack`, { returnObjects: true }) as string[];
+  const logoLight = t(`projects.${id}.companyLogoLight`);
+  const logoDark = t(`projects.${id}.companyLogoDark`);
+  const logoSrc = isDark ? logoDark : logoLight;
 
   return (
-    <motion.section id="projects" className="min-h-screen p-6 md:p-10 text-white flex flex-col justify-center relative overflow-hidden" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
-      <h2 className="text-3xl mb-10 text-center font-bold ">Projetos</h2>
+    <motion.section
+      id="projects"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      style={{ scrollMarginTop: '100px' }}
+    >
+      <Box
+        sx={{
+          px: 4,
+          py: 10,
+          maxWidth: '1000px',
+          mx: 'auto',
+          minHeight: '100vh'
+        }}
+      >
+        <motion.h2 className="text-3xl font-extrabold mb-6 text-center">
+          {t('projects.title')}
+        </motion.h2>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projectData.map((project) => {
-          const isComingSoon = project.comingSoon;
-
-          return (
-            <motion.div
-              key={project.id}
-              className={`group  border border-white rounded-xl overflow-hidden shadow-xl relative transition-all duration-300  ${isComingSoon ? 'pointer-events-none opacity-60' : 'hover:scale-[1.02] cursor-pointer'}`}
-              layout
-              onClick={() => {
-                if (!isComingSoon) {
-                  setActiveProject(project);
-                  setImageIndex(0);
-                }
-              }}
-            >
-              <div className="relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className={`w-full h-48 object-cover transition-all duration-300 ${isComingSoon ? 'brightness-50' : ''}`}
-                />
-                {isComingSoon && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="bg-yellow-400 text-black text-sm px-3 py-1 rounded-full font-bold shadow-lg group-hover:animate-pulse">
-                      EM BREVE
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="p-5 border-t border-white group-hover:text-black min-h-[160px]">
-                <h3 className="text-xl font-semibold mb-1 group-hover:text-black">{project.title}</h3>
-                <p className="text-sm text-gray-300 group-hover:text-black">{project.description}</p>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <AnimatePresence>
-        {activeProject && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveProject(null)}
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 6 }}>
+          <Tabs
+            value={value}
+            onChange={(_, newValue) => setValue(newValue)}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="project tabs"
+            indicatorColor="primary"
           >
-            <motion.div
-              className="bg-[#1f2937] text-white max-w-4xl w-full rounded-lg overflow-hidden relative"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative w-full h-64">
-                <img
-                  src={activeProject.images[imageIndex]}
-                  alt={activeProject.title}
-                  className="w-full h-64 object-cover"
-                />
-                {activeProject.images.length > 1 && (
-                  <>
-                    <button
-                      className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black px-2 py-1 rounded"
-                      onClick={prevImage}
-                    >
-                      ‹
-                    </button>
-                    <button
-                      className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black px-2 py-1 rounded"
-                      onClick={nextImage}
-                    >
-                      ›
-                    </button>
-                  </>
-                )}
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">{activeProject.title}</h3>
-                <p className="text-sm text-gray-300 mb-4">{activeProject.details}</p>
-                {!activeProject.comingSoon && (
-                  <div className="flex flex-wrap gap-4">
-                    <a
-                      href={activeProject.site}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
-                    >
-                      Site
-                    </a>
-                    <a
-                      href={activeProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
-                    >
-                      GitHub
-                    </a>
-                  </div>
-                )}
-                <button
-                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-400"
-                  onClick={() => setActiveProject(null)}
-                >
-                  Fechar
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {projectIds.map((pid) => (
+              <Tab
+                key={pid}
+                label={t(`projects.${pid}.title`).toUpperCase()}
+                sx={{
+                  fontWeight: 600,
+                  color: isDark ? 'black' : 'inherit',
+                  '&.Mui-selected': {
+                    color: isDark ? '' : '#1976d2',
+                  },
+                }}
+              />
+            ))}
+          </Tabs>
+        </Box>
+
+        <Stack direction="column" spacing={2} alignItems="start">
+          {logoSrc && (
+            <Box
+              component="img"
+              src={logoSrc}
+              alt={`Logo ${title}`}
+              sx={{ width: 60, height: 60, objectFit: 'contain' }}
+            />
+          )}
+
+          <Typography variant="body2">{universityNote}</Typography>
+
+          <Box>
+            <Typography variant="h6" fontWeight="bold" gutterBottom>
+              {title}
+            </Typography>
+            <Typography variant="body2" color="gray" paragraph>
+              {description}
+            </Typography>
+            <Typography variant="body2" color="gray" paragraph>
+              {subdescription}
+            </Typography>
+            <Typography variant="body2" color="gray" paragraph>
+              {extra}
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
+            {techStack.map((tech, index) => (
+              <Typography
+                key={index}
+                variant="caption"
+                sx={{
+                  bgcolor: isDark ? '#1e1e1e' : '#f3f4f6',
+                  color: isDark ? 'white' : 'black',
+                  px: 1.5,
+                  py: 0.5,
+                  borderRadius: 1,
+                  fontSize: '0.75rem',
+                }}
+              >
+                {tech}
+              </Typography>
+            ))}
+          </Box>
+        </Stack>
+      </Box>
     </motion.section>
   );
 };

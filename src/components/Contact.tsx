@@ -1,12 +1,15 @@
-// src/components/Contact.tsx
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-
+import { ThemeContext } from '../contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { theme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
+  const { t } = useTranslation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,7 +40,12 @@ export const Contact = () => {
   return (
     <motion.section
       id="contact"
-      className="min-h-screen p-6 md:p-10 flex flex-col justify-center items-center"
+      className="p-6 md:p-10 flex flex-col justify-center items-center"
+      style={{
+        minHeight: '80vh',
+        backgroundColor: isDark ? '#f9f9f9' : 'black',
+        color: isDark ? 'black' : 'white',
+      }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -49,13 +57,14 @@ export const Contact = () => {
         transition={{ delay: 0.2, duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-2xl md:text-3xl mb-4">Contato</h2>
+        <h2 className="text-2xl md:text-3xl mb-4 font">{t('contact.title')}</h2>
+
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <motion.input
             type="text"
             name="name"
-            placeholder="Seu nome"
-            className="p-2 rounded border-1 border-gray-200 text-white"
+            placeholder={t('contact.namePlaceholder')}
+            className={`p-2 rounded border ${isDark ? 'bg-[#222] text-white border-gray-600' : 'bg-white text-black border-gray-300'}`}
             value={formData.name}
             onChange={handleChange}
             whileFocus={{ scale: 1.02 }}
@@ -64,49 +73,48 @@ export const Contact = () => {
           <motion.input
             type="email"
             name="email"
-            placeholder="Seu email"
-            className="p-2 rounded border-1 border-gray-200 text-white"
+            placeholder={t('contact.emailPlaceholder')}
+            className={`p-2 rounded border ${isDark ? 'bg-[#222] text-white border-gray-600' : 'bg-white text-black border-gray-300'}`}
             value={formData.email}
             onChange={handleChange}
             whileFocus={{ scale: 1.02 }}
             required
           />
-         <motion.textarea
+          <motion.textarea
             name="message"
-            placeholder="Sua mensagem"
-            className="p-2 rounded h-32 text-white border-1 border-gray-200  resize-none"
+            placeholder={t('contact.messagePlaceholder')}
+            className={`p-2 rounded h-32 border resize-none ${
+              isDark
+                ? 'bg-[#1e1e1e] text-white placeholder-gray-400 border-gray-600'
+                : 'bg-white text-black placeholder-gray-500 border-gray-300'
+            }`}
             value={formData.message}
             onChange={handleChange}
-            whileFocus={{ scale: 1.02 }}  // Mantém a animação de foco
+            whileFocus={{ scale: 1.02 }}
             required
           />
-
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200"
+            className={`px-4 py-2 rounded font-medium ${
+              isDark
+                ? 'bg-[#f9f9f9] text-black hover:bg-gray-300'
+                : 'bg-black text-white hover:bg-gray-800'
+            }`}
             type="submit"
           >
-            Enviar
+            {t('contact.button')}
           </motion.button>
         </form>
 
         {status === 'success' && (
-          <motion.p
-            className="text-green-400 mt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            Mensagem enviada com sucesso!
+          <motion.p className="mt-4 text-green-500" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            {t('contact.success')}
           </motion.p>
         )}
         {status === 'error' && (
-          <motion.p
-            className="text-red-400 mt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            Ocorreu um erro. Tente novamente mais tarde.
+          <motion.p className="mt-4 text-red-400" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            {t('contact.error')}
           </motion.p>
         )}
       </motion.div>

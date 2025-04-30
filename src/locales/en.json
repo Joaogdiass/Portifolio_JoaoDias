@@ -1,7 +1,91 @@
 {
-    "hero": {
-      "title": "Hi, I'm João",
-      "subtitle": "Software Engineer"
+  "hero": {
+    "title": "Hi, I'm João",
+    "subtitle": "Software Engineer"
+  },
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "about": {
+  "title": "About Me",
+  "paragraph1": "My name is João Gabriel, and I’ve been passionate about programming since I was young. I’m always looking for ways to simplify tasks and make things more efficient using technology.",
+  "paragraph2": "I'm currently a Software Engineering student at FIAP (expected graduation in 2026), focused on building accessible, functional, and impactful solutions.",
+   "paragraph3":"I enjoy challenges, continuous learning, and turning ideas into code."
+}
+,
+  "projects": {
+    "title": "Projects",
+    "1": {
+      "title": "Valoriza",
+      "description": "Valoriza is an intelligent assistant combining artificial intelligence and financial education to help users invest consciously while monitoring behaviors to avoid compulsive habits such as gambling.",
+      "subdescription": "The application works through a mobile app integrated with a Python API using FastAPI, collecting usage, financial transaction and behavioral pattern data. These are analyzed by machine learning models trained with libraries such as scikit-learn and XGBoost.",
+      "extra": "When risky patterns are detected, the system sends personalized alerts, suggests changes, and offers investment recommendations with SHAP or LIME explanations.",
+      "universityNote": "Academic project in partnership with XP Inc.",
+      "techStack": ["FastAPI", "Python", "Pytorch", "Pandas", "React", "React Native", "TensorFlow"]
+    },
+    "2": {
+      "title": "LapIn (Laparoscopy Inclusive)",
+      "description": "Virtual surgical training environment focused on accessibility.",
+      "subdescription": "Uses virtual reality and artificial intelligence to simulate laparoscopic scenarios accessible to everyone.",
+      "extra": "Provides performance metrics and real-time AI assistance, allowing personalized 24/7 practice.",
+      "universityNote": "Academic project in partnership with Hospital das Clínicas - LEPIC",
+      "techStack": ["C#", "PyTorch", "Pandas", "Maya", "MySQL"]
+    },
+    "3": {
+      "title": "ElectroDrive",
+      "description": "Intelligent wireless charging system for electric vehicles.",
+      "subdescription": "Learns usage patterns and automatically optimizes routes and charging times.",
+      "extra": "Uses machine learning to optimize energy consumption, distance, charging time, and efficiency.",
+      "universityNote": "Academic project in partnership with IBM",
+      "techStack": ["C#", "C++", "IoT", "FastAPI"]
+    },
+    "4": {
+      "title": "EcoPathogen Insights",
+      "description": "Intelligent system for analyzing sanitation quality using sensors, algorithms, and chemical analysis.",
+      "subdescription": "Monitors water pathogens through data collection from sewers with IoT sensors, automated chemical analysis, and Python processing supported by calculus and interpolation algorithms.",
+      "extra": "In addition to generating automated alerts and reports, the system is accessible, integrates with public health initiatives, and complies with technical and regulatory requirements. It uses derivatives and curve analysis to predict outbreaks based on Arduino-collected data.",
+      "universityNote": "Academic project in partnership with HapVida - NotreDame",
+      "techStack": ["Python", "Arduino", "FastAPI", "IoT", "Matplotlib", "Interpolation", "Derivatives", "SciPy"],
+      "companyLogoLight": "/images/projetos/ecopathogen-light.png",
+      "companyLogoDark": "/images/projetos/ecopathogen-dark.png"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Your email",
+    "messagePlaceholder": "Your message",
+    "button": "Send",
+    "success": "Message sent successfully!",
+    "error": "An error occurred. Please try again later."
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "frontend": "Front-End",
+      "backend": "Back-End",
+      "database": "Database",
+      "tools": "Tools",
+      "cloud": "Cloud"
+    },
+    "items": {
+      "react": "Library for building reactive interfaces.",
+      "typescript": "JavaScript superset with static typing.",
+      "javascript": "Universal programming language for the web.",
+      "node": "Environment for running JS on the backend.",
+      "express": "Minimalist framework for Node.js.",
+      "python": "Powerful and versatile programming language.",
+      "csharp": "Microsoft's language for robust applications.",
+      "postgresql": "Advanced relational database system.",
+      "mongodb": "Document-oriented NoSQL database.",
+      "mysql": "Popular and reliable relational database.",
+      "git": "Distributed version control system.",
+      "aws": "Amazon's cloud platform for scalable services.",
+      "googlecloud": "Google's cloud solutions for data and applications."
     }
   }
-  
+}
